@@ -1,4 +1,4 @@
-## Hangman game
+## Hangman game (work in progress)
 
 Build with create-react-app, Redux, CSS Grid
 
