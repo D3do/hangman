@@ -19,28 +19,31 @@ class App extends Component {
 
   checkLetter = (pressedKey) => {
     if(this.props.fetchedWord.includes(pressedKey)) {
-      if(this.props.missedLetters.includes(pressedKey) || this.props.guessedLetters.includes(pressedKey)) {
-        console.log('try different letter')
-      } else {
+      if(this.props.guessedLetters.includes(pressedKey) ||
+         this.props.missedLetters.includes(pressedKey)) {
+        console.log('try different letter');
+      } else if (!this.props.guessedLetters.includes(pressedKey)) {
         this.props.addGuessedLetter(pressedKey);
       }
-    } else {
-      this.props.addMissedLetter(pressedKey);
+    } else if (!this.props.fetchedWord.includes(pressedKey)) {
+      if(!this.props.missedLetters.includes(pressedKey)) {
+        this.props.addMissedLetter(pressedKey);
+      }
     }
-  }
+
+    this.hasPlayerWon();
+  };
 
   hasPlayerWon = () => {
-    console.log('hasPlayerWon?')
     if(this.props.missedLetters.length > 11) {
-      this.props.gameOver(true, false);
+      this.props.gameFinished(true, false);
     }
   }
 
   render() {
     return (
       <div className={styles.App}>
-        {this.props.loading ? <h1>Loading...</h1> : null}
-        {this.props.gameOver ? <GameState /> : null}
+        {this.props.isGameOver ? <GameState /> : null}
         <Hangman />
         <MissedLetters />
         <Letters />
@@ -53,7 +56,7 @@ const mapStateToProps = state => {
   return {
     loading: state.fetchWordReducer.fetchWordStart,
     fetchedWord: state.fetchWordReducer.fetchedWord ? state.fetchWordReducer.fetchedWord.toUpperCase() : '',
-    gameOver: state.gameReducer.gameOver,
+    isGameOver: state.gameReducer.gameOver,
     gameWon: state.gameReducer.gameWon,
     missedLetters: state.gameReducer.missedLetters ? state.gameReducer.missedLetters.join('').toUpperCase() : '',
     guessedLetters: state.gameReducer.guessedLetters ? state.gameReducer.guessedLetters.join('').toUpperCase() : ''
@@ -65,7 +68,7 @@ const mapDispatchToProps = dispatch => {
     fetchWord: () => dispatch(actions.fetchWord()),
     addMissedLetter: (letter) => dispatch(actions.addMissedLetter(letter)),
     addGuessedLetter: (letter) => dispatch(actions.addGuessedLetter(letter)),
-    gameOver: (gameOver, gameWon) => dispatch(actions.gameOver(gameOver, gameWon))
+    gameFinished: (gameOver, isGameWon) => dispatch(actions.gameOver(gameOver, isGameWon))
   }
 }
 

@@ -23,7 +23,7 @@ export const fetchWord = () => {
   return dispatch => {
     dispatch(fetchWordStart());
 
-    fetch('http://api.wordnik.com:80/v4/words.json/randomWord?hasDictionaryDef=true&includePartOfSpeech=noun&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=11&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5')
+    fetch('http://api.wordnik.com:80/v4/words.json/randomWord?hasDictionaryDef=true&includePartOfSpeech=noun&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=11&api_key=676d1333e4d75f2a7fa5c0d62da0bb62cbc52a4c35ae8fcb0')
       .then(response => response.json()
       .then(word => {
         dispatch(fetchWordSuccess(word.word))
