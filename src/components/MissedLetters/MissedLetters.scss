@@ -1,0 +1,24 @@
+@import '../../variables';
+
+.MissedLetters {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15% 1fr;
+  grid-column-start: 3;
+  grid-row: 1 / 3;
+  grid-auto-flow: column;
+
+  p {
+    display: grid;
+    margin-top: 40px;
+    font-size: 1.5em;
+    color: $dark-gray;
+    grid-row: 1 / 2;
+  }
+
+  .MissedLetter {
+    font-size: 4em;
+    color: $blue-color;
+    text-transform: uppercase;
+  }
+}

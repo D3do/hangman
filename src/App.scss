@@ -1,0 +1,22 @@
+@import 'main';
+@import 'variables';
+
+body {
+  background: $body-color;
+  min-width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+
+  .App {
+    background: linear-gradient(135deg, rgb(255,255,255) 85%, $blue-color 85%);
+    box-shadow: 10px 10px 100px 0 rgba(0,0,0,.60);
+    border-radius: 10px;
+    min-width: 90vw;
+    min-height: 80vh;
+    display: grid;
+    grid-template-columns: 25% 25% 1fr;
+    grid-template-rows: 50% 1fr;
+  }
+}

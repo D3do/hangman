@@ -1,0 +1,169 @@
+@import '../../variables';
+
+.Hangman {
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 2;
+
+  .Gallows {
+    width: 200px;
+    height: 20px;
+    border-radius: 0 8px 8px 0;
+    position: absolute;
+    margin-top: 40px;
+    background-color: $dark-gray;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 20px;
+      position: absolute;
+      margin-left: 167px;
+      top: 20px;
+      background-color: $dark-gray;
+    }
+  }
+
+  .Head {
+    width: 100px;
+    height: 100px;
+    background-image: url("../../images/head.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    margin-left: 126px;
+    margin-top: 78px;
+    z-index: 1
+  }
+
+  .Neck {
+    width: 22px;
+    height: 10px;
+    position: absolute;
+    margin-left: 165px;
+    margin-top: 176px;
+    background-color: $skin-color;
+  }
+
+  .Body {
+    z-index: 1;
+    width: 55px;
+    height: 85px;
+    position: absolute;
+    margin-left: 147px;
+    margin-top: 185px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: $light-green;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 60px;
+      position: absolute;
+      margin-left: 50%;
+      margin-top: 0px;
+      background-color: $dark-green;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 60px;
+      position: absolute;
+      margin-left: 0;
+      margin-top: 60px;
+      background-color: $pants-color;
+    }
+  }
+
+  @mixin arm() {
+    z-index: 1;
+    width: 22px;
+    height: 60px;
+    position: absolute;
+    margin-top: 182px;
+    border-radius: 5px;
+  }
+
+  .rightArm {
+    @include arm;
+    background-color: $dark-green;
+    margin-left: 200px;
+    transform: rotate(-45deg);
+  }
+
+  .leftArm {
+    @include arm;
+    background-color: $light-green;
+    margin-left: 126px;
+    transform: rotate(45deg);
+  }
+
+  @mixin hand() {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    margin-top: 226px;
+    border-radius: 50%;
+    background-color: $skin-color;
+  }
+
+  .rightHand {
+    @include hand;
+    margin-left: 225px;
+  }
+
+  .leftHand {
+    @include hand;
+    margin-left: 108px;
+  }
+
+  @mixin leg() {
+    z-index: 3;
+    width: 25px;
+    height: 90px;
+    position: absolute;
+    margin-top: 258px;
+    border-radius: 5px;
+    background-color: $pants-color;
+  }
+
+  .rightLeg {
+    @include leg;
+    margin-left: 183px;
+    transform: rotate(-10deg);
+  }
+
+  .leftLeg {
+    @include leg;
+    margin-left: 141px;
+    transform: rotate(10deg);
+  }
+
+  @mixin foot() {
+    z-index: 2;
+    width: 42px;
+    height: 15px;
+    position: absolute;
+    margin-top: 340px;
+    border-radius: 5px;
+    background-color: $skin-color;
+  }
+
+  .rightFoot {
+    @include foot;
+    margin-left: 195px;
+    transform: rotate(-8deg);
+  }
+
+  .leftFoot {
+    @include foot;
+    margin-left: 112px;
+    transform: rotate(8deg);
+  }
+}
