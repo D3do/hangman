@@ -22,9 +22,9 @@ class Hangman extends Component {
 
   render() {
     const hangman = this.state.hangman.filter((hangmanClass, index) => index <= this.props.missedLettersLength)
-      .map((value, index) => {
+      .map((hangmanClass, index) => {
         return (
-          <div key={index} className={value} />
+          <div key={index} className={hangmanClass} />
         )
     });
 
