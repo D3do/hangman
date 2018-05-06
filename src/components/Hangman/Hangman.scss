@@ -90,14 +90,14 @@
     border-radius: 5px;
   }
 
-  .rightArm {
+  .RightArm {
     @include arm;
     background-color: $dark-green;
     margin-left: 200px;
     transform: rotate(-45deg);
   }
 
-  .leftArm {
+  .LeftArm {
     @include arm;
     background-color: $light-green;
     margin-left: 126px;
@@ -113,12 +113,12 @@
     background-color: $skin-color;
   }
 
-  .rightHand {
+  .RightHand {
     @include hand;
     margin-left: 225px;
   }
 
-  .leftHand {
+  .LeftHand {
     @include hand;
     margin-left: 108px;
   }
@@ -133,13 +133,13 @@
     background-color: $pants-color;
   }
 
-  .rightLeg {
+  .RightLeg {
     @include leg;
     margin-left: 183px;
     transform: rotate(-10deg);
   }
 
-  .leftLeg {
+  .LeftLeg {
     @include leg;
     margin-left: 141px;
     transform: rotate(10deg);
@@ -155,13 +155,13 @@
     background-color: $skin-color;
   }
 
-  .rightFoot {
+  .RightFoot {
     @include foot;
     margin-left: 195px;
     transform: rotate(-8deg);
   }
 
-  .leftFoot {
+  .LeftFoot {
     @include foot;
     margin-left: 112px;
     transform: rotate(8deg);

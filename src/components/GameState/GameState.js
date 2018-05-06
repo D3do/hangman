@@ -13,7 +13,7 @@ class GameOver extends Component {
     return (
       <div className={styles.GameState}>
         <h1>{this.props.gameWon ? "YOU'VE WON" : "GAME OVER"}</h1>
-        <button onClick={this.onClick}>NEW WORD</button>
+        <button onClick={this.onClick} autoFocus>NEW WORD</button>
       </div>
     );
   };
@@ -22,6 +22,7 @@ class GameOver extends Component {
 const mapStateToProps = state => {
   return {
     gameWon: state.gameReducer.gameWon,
+    loading: state.fetchWordStart
   };
 };
 

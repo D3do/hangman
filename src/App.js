@@ -13,32 +13,36 @@ class App extends Component {
     this.props.fetchWord();
 
     window.addEventListener('keypress', (event) => {
-      (!this.props.gameOver) && this.checkLetter(event.key.toUpperCase());
+      !this.props.isGameOver && this.checkLetter(event.key.toUpperCase());
     });
   };
 
   checkLetter = (pressedKey) => {
     if(this.props.fetchedWord.includes(pressedKey)) {
       if(this.props.guessedLetters.includes(pressedKey) ||
-         this.props.missedLetters.includes(pressedKey)) {
-        console.log('try different letter');
+        this.props.missedLetters.includes(pressedKey)) {
+          console.log('try different letter');
       } else if (!this.props.guessedLetters.includes(pressedKey)) {
-        this.props.addGuessedLetter(pressedKey);
+        [...this.props.fetchedWord].forEach(letter => {
+          if(letter === pressedKey) {
+            this.props.addGuessedLetter(pressedKey);
+          }
+        });
       }
-    } else if (!this.props.fetchedWord.includes(pressedKey)) {
-      if(!this.props.missedLetters.includes(pressedKey)) {
-        this.props.addMissedLetter(pressedKey);
-      }
+    } else if (!this.props.fetchedWord.includes(pressedKey) && !this.props.missedLetters.includes(pressedKey)) {
+      this.props.addMissedLetter(pressedKey);
     }
 
     this.hasPlayerWon();
   };
 
   hasPlayerWon = () => {
-    if(this.props.missedLetters.length > 11) {
+    if(this.props.missedLetters.length > 10) {
       this.props.gameFinished(true, false);
+    } else if (this.props.guessedLetters.length === this.props.fetchedWord.length) {
+      this.props.gameFinished(true, true);
     }
-  }
+  };
 
   render() {
     return (

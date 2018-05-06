@@ -1,43 +1,45 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import styles from './Hangman.scss';
 
 class Hangman extends Component {
   state = {
     hangman: [
-      'gallows',
-      'head',
-      'neck',
-      'body',
-      'right-arm',
-      'left-arm',
-      'right-hand',
-      'left-hand',
-      'right-leg',
-      'left-leg',
-      'right-foot',
-      'left-foot'
+      styles.Gallows,
+      styles.Head,
+      styles.Neck,
+      styles.Body,
+      styles.RightArm,
+      styles.LeftArm,
+      styles.RightHand,
+      styles.LeftHand,
+      styles.RightLeg,
+      styles.LeftLeg,
+      styles.RightFoot,
+      styles.LeftFoot
     ]
   }
 
   render() {
-    return(
+    const hangman = this.state.hangman.filter((hangmanClass, index) => index <= this.props.missedLettersLength)
+      .map((value, index) => {
+        return (
+          <div key={index} className={value} />
+        )
+    });
+
+    return (
       <div className={styles.Hangman}>
-        <div className={styles.Gallows}></div>
-        <div className={styles.Head}></div>
-        <div className={styles.Neck}></div>
-        <div className={styles.Body}></div>
-        <div className={styles.rightArm}></div>
-        <div className={styles.leftArm}></div>
-        <div className={styles.rightHand}></div>
-        <div className={styles.leftHand}></div>
-        <div className={styles.rightLeg}></div>
-        <div className={styles.leftLeg}></div>
-        <div className={styles.rightFoot}></div>
-        <div className={styles.leftFoot}></div>
+        {hangman}
       </div>
     );
   }
 }
 
-export default Hangman;
+const mapStateToProps = state => {
+  return {
+    missedLettersLength: state.gameReducer.missedLetters.length
+  };
+};
+
+export default connect(mapStateToProps)(Hangman);

@@ -2,4 +2,4 @@
 
 Build with create-react-app, Redux, CSS Grid
 
-Based on Netguru recruitment task: https://github.com/patryknawolski/frontend-recruitment-task
+Based on former Netguru recruitment task: https://github.com/patryknawolski/frontend-recruitment-task
