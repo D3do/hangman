@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styles from './Letters.scss';
 
 const Letters = (props) => {
@@ -24,6 +25,11 @@ const mapStateToProps = state => {
     fetchedWord: state.fetchWordReducer.fetchedWord ? state.fetchWordReducer.fetchedWord : '',
     guessedLetters: state.gameReducer.guessedLetters
   };
+};
+
+Letters.propTypes = {
+  fetchedWord: PropTypes.string,
+  guessedLetters: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default connect(mapStateToProps)(Letters);

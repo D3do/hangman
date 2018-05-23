@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Letters from './components/Letters/Letters';
 import GameState from './components/GameState/GameState';
@@ -17,11 +18,18 @@ class App extends Component {
     });
   };
 
+  differentLetter = () => {
+    const message = document.querySelector('.repeatedLetter');
+    message.innerText = 'Try different letter';
+    setTimeout(function(){
+      message.innerText = '';
+    }, 700);
+  }
+
   checkLetter = (pressedKey) => {
     if(this.props.fetchedWord.includes(pressedKey)) {
       if(this.props.guessedLetters.includes(pressedKey) ||
         this.props.missedLetters.includes(pressedKey)) {
-          console.log('try different letter');
       } else if (!this.props.guessedLetters.includes(pressedKey)) {
         [...this.props.fetchedWord].forEach(letter => {
           if(letter === pressedKey) {
@@ -33,6 +41,7 @@ class App extends Component {
       this.props.addMissedLetter(pressedKey);
     }
 
+    this.differentLetter();
     this.hasPlayerWon();
   };
 
@@ -48,8 +57,10 @@ class App extends Component {
     return (
       <div className={styles.App}>
         {this.props.isGameOver ? <GameState /> : null}
+        {this.informUser}
         <Hangman />
         <MissedLetters />
+        <div className='repeatedLetter'></div>
         <Letters />
       </div>
     );
@@ -58,14 +69,12 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.fetchWordReducer.fetchWordStart,
     fetchedWord: state.fetchWordReducer.fetchedWord ? state.fetchWordReducer.fetchedWord.toUpperCase() : '',
     isGameOver: state.gameReducer.gameOver,
-    gameWon: state.gameReducer.gameWon,
     missedLetters: state.gameReducer.missedLetters ? state.gameReducer.missedLetters.join('').toUpperCase() : '',
     guessedLetters: state.gameReducer.guessedLetters ? state.gameReducer.guessedLetters.join('').toUpperCase() : ''
   }
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -74,6 +83,17 @@ const mapDispatchToProps = dispatch => {
     addGuessedLetter: (letter) => dispatch(actions.addGuessedLetter(letter)),
     gameFinished: (gameOver, isGameWon) => dispatch(actions.gameOver(gameOver, isGameWon))
   }
-}
+};
+
+App.propTypes = {
+  fetchedWord: PropTypes.string,
+  isGameOver: PropTypes.bool,
+  missedLetters: PropTypes.string,
+  guessedLetters: PropTypes.string,
+  fetchWord: PropTypes.func,
+  addMissedLetter: PropTypes.func,
+  addGuessedLetter: PropTypes.func,
+  gameFinished: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

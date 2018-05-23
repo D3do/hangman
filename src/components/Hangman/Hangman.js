@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styles from './Hangman.scss';
 
 class Hangman extends Component {
@@ -40,6 +41,10 @@ const mapStateToProps = state => {
   return {
     missedLettersLength: state.gameReducer.missedLetters.length
   };
+};
+
+Hangman.propTypes = {
+  missedLettersLength: PropTypes.number
 };
 
 export default connect(mapStateToProps)(Hangman);

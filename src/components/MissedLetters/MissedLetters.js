@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styles from './MissedLetters.scss';
 
 const MissedLetters = (props) => {
@@ -19,6 +20,10 @@ const mapStateToProps = state => {
   return {
     missedLetters: state.gameReducer.missedLetters ? state.gameReducer.missedLetters : null
   }
-}
+};
+
+MissedLetters.propTypes = {
+  missedLetters: PropTypes.arrayOf(PropTypes.string)
+};
 
 export default connect(mapStateToProps)(MissedLetters);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as actions from '../../store/actions/index';
 import styles from './GameState.scss';
 
@@ -31,6 +32,12 @@ const mapDispatchToProps = dispatch => {
     fetchWord: () => dispatch(actions.fetchWord()),
     newGame: () => dispatch(actions.newGame())
   };
+};
+
+GameOver.propTypes = {
+  fetchWord: PropTypes.func,
+  newGame: PropTypes.func,
+  gameWon: PropTypes.bool
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameOver);
