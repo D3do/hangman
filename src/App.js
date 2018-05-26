@@ -18,14 +18,6 @@ class App extends Component {
     });
   };
 
-  differentLetter = () => {
-    const message = document.querySelector('.repeatedLetter');
-    message.innerText = 'Try different letter';
-    setTimeout(function(){
-      message.innerText = '';
-    }, 700);
-  }
-
   checkLetter = (pressedKey) => {
     if(this.props.fetchedWord.includes(pressedKey)) {
       if(this.props.guessedLetters.includes(pressedKey) ||
@@ -41,7 +33,6 @@ class App extends Component {
       this.props.addMissedLetter(pressedKey);
     }
 
-    this.differentLetter();
     this.hasPlayerWon();
   };
 
